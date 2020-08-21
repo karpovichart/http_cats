@@ -1,8 +1,10 @@
 import requests
 import os
 import sys
+from sys import platform
 import argparse
 import random
+
 
 
 def create_parser() -> argparse.ArgumentParser:
@@ -11,12 +13,19 @@ def create_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def choose_os() -> str:
+    if platform == "win32":
+        return "\\"
+    return "/"
+
+
+
 def download_cat_img(http_code: int) -> None:
     print(http_code)
     if not os.path.exists("tmp"):
         os.mkdir("tmp")
     url = "https://http.cat/" + str(http_code) + ".jpg"
-    path = "tmp\\" + str(http_code) + ".jpg"
+    path = "tmp"+choose_os() + str(http_code) + ".jpg"
     img = requests.get(url)
     out = open(path, "wb")
     out.write(img.content)
