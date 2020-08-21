@@ -22,6 +22,7 @@ def download_cat_img(http_code: int) -> None:
     out.write(img.content)
     out.close()
     os.startfile(path)
+    return None
 
 
 def run() -> None:
@@ -35,12 +36,14 @@ def run() -> None:
     if namespace.status is None:
         http_code = http_codes_list[random.randint(0, len(http_codes_list))]
         download_cat_img(http_code)
+        return None
 
     if namespace.status in http_codes_list:
         print("Complete.")
         download_cat_img(namespace.status)
     else:
         print("Bad Code!")
+    return None
 
 
 if __name__ == '__main__':
