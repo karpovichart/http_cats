@@ -5,18 +5,15 @@ from sys import platform
 import argparse
 import random
 import logging
-
-'''
-warnings - no parametrs
-debug level - what params
-debug level - what url will be download
-
-'''
+import tempfile
+import webbrowser
 
 
 def create_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="./httpcat.py a program to get cat picture for a http status")
-    parser.add_argument('-s', '--status', type=int, nargs='?', help="specify http status to get")
+    parser = argparse.ArgumentParser(
+        description="./httpcat.py a program to get cat picture for a http status")
+    parser.add_argument('-s', '--status', type=int, nargs='?',
+                        help="specify http status to get")
     return parser
 
 
@@ -27,15 +24,12 @@ def choose_os() -> str:
 
 
 def download_cat_img(http_code: int) -> None:
-    if not os.path.exists("tmp"):
-        os.mkdir("tmp")
     url = "https://http.cat/" + str(http_code) + ".jpg"
-    path = "tmp" + choose_os() + str(http_code) + ".jpg"
     img = requests.get(url)
     logging.debug(f'URL: {url}')
-    with open(path, "wb") as file:
+    with open(tempfile.NamedTemporaryFile(suffix=".jpg").name, "wb") as file:
         file.write(img.content)
-    os.startfile(path)
+        webbrowser.open(file.name)
     return None
 
 
@@ -68,6 +62,7 @@ def run() -> None:
 
 
 if __name__ == '__main__':
-    logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.DEBUG)
+    logging.basicConfig(
+        format='%(asctime)s - %(levelname)s - %(message)s', level=logging.DEBUG)
     logging.getLogger('urllib3').setLevel(logging.CRITICAL)
     run()
