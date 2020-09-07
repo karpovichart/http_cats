@@ -1,13 +1,6 @@
 pipeline {
     agent any
-     environment {
-       AWS_DEFAULT_REGION = 'eu-central-1'
 
-    }
-
-    parameters {
-        string(defaultValue: "ami-04932daa2567651e7", description: 'AMI', name: 'AMI')
-    }
     stages {
          stage("clean up workspace"){
                         steps{
