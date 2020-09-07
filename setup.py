@@ -42,7 +42,7 @@ class PylintCommand(distutils.cmd.Command):
     try:
         subprocess.check_call(command)
     except subprocess.CalledProcessError as err:
-        print(str(err))
+
 
 
 setup(name='http_cats',
