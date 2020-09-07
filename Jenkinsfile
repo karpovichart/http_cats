@@ -20,7 +20,8 @@ pipeline {
             steps {
                 dir("http_cats") {
 
-                                sh ''' #!/bin/bash
+
+                                shell ''' #!/bin/bash
                                 python3 -m venv env
                                 source ./env/bin/activate
                                  python3 setup.py install'''
@@ -34,7 +35,7 @@ pipeline {
          steps {
                 dir("http_cats") {
 
-                                 sh ''' #!/bin/bash
+                                 shell ''' #!/bin/bash
                                  source ./env/bin/activate
                                  python3 setup.py pylint --pylint-rcfile=tests/.pylintrc
                                  flake8
@@ -47,8 +48,9 @@ pipeline {
 		stage("build"){
          steps {
                 dir("http_cats") {
-                                sh ''' #!/bin/bash
+                                shell ''' #!/bin/bash
                                 source ./env/bin/activate
+                                pip3 freeze
 				                python3 setup.py build'''
                 }
             }
