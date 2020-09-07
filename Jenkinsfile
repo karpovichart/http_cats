@@ -21,7 +21,7 @@ pipeline {
                 dir("http_cats") {
 
                                 sh("python3 -m venv env")
-                                sh("sudo source env/bin/activate")
+                                sh("source env/bin/activate")
                                 sh("python3 setup.py install")
 
 
