@@ -19,6 +19,11 @@ pipeline {
         stage("install") {
             steps {
                 dir("http_cats") {
+                                    sh '''#!/bin/bash
+
+                                        echo "Hello from bash"
+                                        echo "Who I'm $SHELL"
+                                    '''
 
 
                                 bash ''' #!/bin/bash
