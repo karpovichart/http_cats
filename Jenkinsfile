@@ -43,7 +43,7 @@ pipeline {
                                  sh ''' #!/bin/bash
                                  source ./env/bin/activate
                                  python3 setup.py pylint --pylint-rcfile=tests/.pylintrc
-                                 flake8
+                                 flake8 --config tests/tox.ini
                                  python3 setup.py test
                                  '''
                 }
