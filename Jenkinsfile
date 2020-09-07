@@ -1,8 +1,6 @@
 pipeline {
     agent any
-    tools{
-    python3-venv
-    }
+
 
 
     stages {
