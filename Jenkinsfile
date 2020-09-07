@@ -54,7 +54,7 @@ pipeline {
          steps {
                 dir("http_cats") {
                                 sh ''' #!/bin/bash
-                                source ./env/bin/activate
+                                . .env/bin/activate
                                 pip3 freeze
 				                python3 setup.py build'''
                 }
