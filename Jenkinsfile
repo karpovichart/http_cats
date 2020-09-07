@@ -43,7 +43,7 @@ pipeline {
                                  sh ''' #!/bin/bash
                                  source ./env/bin/activate
                                  python3 setup.py pylint --pylint-rcfile=tests/.pylintrc
-
+                                 flake8 --config tests/tox.ini --exit-zero
                                  python3 setup.py test
                                  '''
                 }
@@ -54,7 +54,7 @@ pipeline {
          steps {
                 dir("http_cats") {
                                 sh ''' #!/bin/bash
-                                . .env/bin/activate
+                                source ./env/bin/activate
                                 pip3 freeze
 				                python3 setup.py build'''
                 }
