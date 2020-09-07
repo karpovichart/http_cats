@@ -33,11 +33,13 @@ pipeline {
 		stage("tests"){
          steps {
                 dir("http_cats") {
-                                sh("python3 setup.py pylint --pylint-rcfile=tests/.pylintrc")
-								sh("flake8")
-								sh("python3 setup.py test")
 
-
+                                 shell ''' #!/bin/bash
+                                 source ./env/bin/activate
+                                 python3 setup.py pylint --pylint-rcfile=tests/.pylintrc
+                                 flake8
+                                 python3 setup.py test
+                                 '''
                 }
             }
 
@@ -45,7 +47,9 @@ pipeline {
 		stage("build"){
          steps {
                 dir("http_cats") {
-								sh("python3 setup.py build")
+                                shell ''' #!/bin/bash
+                                source ./env/bin/activate
+				                python3 setup.py build'''
                 }
             }
 
