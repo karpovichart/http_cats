@@ -24,9 +24,9 @@ pipeline {
         stage("install") {
             steps {
                 dir("http_cats") {
-                                sh("apt-get install python3-venv -y")
+                                sh("sudo apt-get install python3-venv -y")
                                 sh("python3 -m venv env")
-                                sh("source env/bin/activate")
+                                sh("sudo source env/bin/activate")
                                 sh("python3 setup.py install")
 
 
