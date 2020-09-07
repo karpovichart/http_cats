@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+    python3-venv
+    }
 
     stages {
          stage("clean up workspace"){
@@ -17,7 +20,7 @@ pipeline {
         stage("install") {
             steps {
                 dir("http_cats") {
-                                sh("sudo apt-get install python3-venv -y")
+
                                 sh("python3 -m venv env")
                                 sh("sudo source env/bin/activate")
                                 sh("python3 setup.py install")
